@@ -36,6 +36,8 @@
     @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script src="https://kit.fontawesome.com/65079d3bf2.js" crossorigin="anonymous"></script>
+
 </body>
 
     </body>
