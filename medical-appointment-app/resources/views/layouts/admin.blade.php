@@ -17,7 +17,12 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        
+        <!-- Font awsome -->
+        <script src="https://kit.fontawesome.com/65079d3bf2.js" crossorigin="anonymous"></script>
+        
+        <!-- WireUI -->
+        <wireui:scripts />
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -35,13 +40,13 @@
 
 
         @stack('modals')
-
+ 
         @livewireScripts
         <body>
     @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-    <script src="https://kit.fontawesome.com/65079d3bf2.js" crossorigin="anonymous"></script>
+
 
 </body>
 
