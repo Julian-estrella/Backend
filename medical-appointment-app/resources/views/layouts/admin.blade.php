@@ -51,7 +51,31 @@
 
         @if(@session('swal'))
           <script>
-            Swal.fire(@json(session('swal')));
+      forms = document.querySelectorAll('.delete-form');
+      forms.forEach(form=>{
+        //Revisa cualquier accion en envio
+        form.addEventListener('submit', function(e){
+          //previene el envio del formulario
+          e.preventDefault();
+            Swal.fire({
+            title: "Estas seguro?",
+            text: "No puedes revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Eliminar!",
+            cancelButtonText: "Cancelar"
+          }).then((result) => {
+          if (result.isConfirmed) {
+            form.submit();
+          }
+
+    });
+        });
+      });
+            
+            
           </script>
         @endif
 
