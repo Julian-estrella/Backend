@@ -56,7 +56,7 @@ class PatientController extends Controller
     public function update(Request $request, Patient $patient)
     {
         $data = $request->validate([
-        'blood_type' => 'nullable|exists:blood_type,id',
+        'blood_type_id' => 'nullable|exists:blood_types,id',
         'allergies' => 'nullable|string|min:3|max:255',
         'chronic_conditions' => 'nullable|string|min:3|max:255',
         'surgical_history' => 'nullable|string|min:3|max:255',
