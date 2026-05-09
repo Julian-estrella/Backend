@@ -110,8 +110,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Motivo de la cita</label>
-                        <textarea wire:model="reason" rows="3" placeholder="Ej. Chequeo de medicamentos" class="w-full rounded-lg border-gray-200 text-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">Motivo de la cita <span class="text-red-500">*</span></label>
+                        <textarea wire:model="reason" rows="4" placeholder="Ej. Chequeo de medicamentos, dolor abdominal..." class="w-full rounded-lg border-gray-200 text-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
                         @error('reason') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
 

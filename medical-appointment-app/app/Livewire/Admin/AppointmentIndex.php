@@ -13,8 +13,11 @@ class AppointmentIndex extends Component
 
     public function delete($id)
     {
-        Appointment::find($id)->delete();
-        session()->flash('message', 'Cita eliminada correctamente.');
+        $appointment = Appointment::find($id);
+        if ($appointment) {
+            $appointment->delete();
+            session()->flash('message', 'Cita eliminada correctamente.');
+        }
     }
 
     public function cancel($id)

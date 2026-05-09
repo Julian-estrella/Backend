@@ -51,12 +51,12 @@
             @elseif($activeTab === 'consulta')
                 <div class="space-y-4">
                     <div>
-                        <label for="diagnosis" class="block text-sm font-medium text-gray-700">Diagnóstico</label>
+                        <label for="diagnosis" class="block text-sm font-medium text-gray-700">Diagnóstico <span class="text-red-500">*</span></label>
                         <textarea wire:model="diagnosis" id="diagnosis" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
                         @error('diagnosis') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label for="treatment" class="block text-sm font-medium text-gray-700">Tratamiento</label>
+                        <label for="treatment" class="block text-sm font-medium text-gray-700">Tratamiento <span class="text-red-500">*</span></label>
                         <textarea wire:model="treatment" id="treatment" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
                         @error('treatment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>

@@ -102,13 +102,13 @@ class AppointmentCreate extends Component
             'date' => 'required|date|after_or_equal:today',
             'start_time' => 'required',
             'end_time' => 'required|after:start_time',
-            'reason' => 'nullable|string'
+            'reason' => 'required|string|min:5'
         ]);
 
         // Asegurar que el usuario tenga un perfil de doctor
         $doctorProfile = Doctor::firstOrCreate(['user_id' => $this->doctor_id]);
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'patient_id' => $this->patient_id,
             'doctor_id' => $doctorProfile->id,
             'date' => $this->date,
@@ -118,7 +118,30 @@ class AppointmentCreate extends Component
             'status' => 1 // 1: Pendiente
         ]);
 
-        session()->flash('message', 'Cita creada exitosamente.');
+        // Ejecutar notificaciones de forma síncrona para mostrar el resultado inmediato
+        $notificationService = app(\App\Services\NotificationService::class);
+        $results = $notificationService->sendAppointmentNotifications($appointment->id);
+
+        $statusMessage = "Cita creada exitosamente.";
+        $icon = "success";
+
+        if ($results['patient_email'] && $results['doctor_email']) {
+            $statusMessage .= "\n- Correos enviados a paciente y doctor.";
+        } else {
+            $statusMessage .= "\n- Error al enviar algunos correos.";
+            $icon = "warning";
+        }
+
+        if ($results['whatsapp']) {
+            $statusMessage .= "\n- WhatsApp de confirmación enviado.";
+        }
+
+        // Usar swal para mostrar la "ventana" solicitada
+        session()->flash('swal', [
+            'icon' => $icon,
+            'title' => 'Resultado de Notificaciones',
+            'text' => $statusMessage,
+        ]);
 
         return redirect()->route('admin.appointments.index');
     }

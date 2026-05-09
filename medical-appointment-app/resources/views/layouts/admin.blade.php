@@ -49,35 +49,38 @@
 
         @stack('modals')
 
-        @if(@session('swal'))
+        @if(session('swal'))
           <script>
-      forms = document.querySelectorAll('.delete-form');
-      forms.forEach(form=>{
-        //Revisa cualquier accion en envio
-        form.addEventListener('submit', function(e){
-          //previene el envio del formulario
-          e.preventDefault();
             Swal.fire({
-            title: "Estas seguro?",
-            text: "No puedes revertir esto!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si, Eliminar!",
-            cancelButtonText: "Cancelar"
-          }).then((result) => {
-          if (result.isConfirmed) {
-            form.submit();
-          }
-
-    });
-        });
-      });
-            
-            
+              icon: "{{ session('swal')['icon'] }}",
+              title: "{{ session('swal')['title'] }}",
+              text: `{!! session('swal')['text'] !!}`,
+            });
           </script>
         @endif
+
+        <script>
+          // Manejador para formularios de eliminación
+          document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              Swal.fire({
+                title: "Estas seguro?",
+                text: "No puedes revertir esto!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, Eliminar!",
+                cancelButtonText: "Cancelar"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  form.submit();
+                }
+              });
+            });
+          });
+        </script>
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
